@@ -9,6 +9,7 @@ packages = [{include = "upload_to_github"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 pygithub = "^1.58.0"
+python-slugify = "^8.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
