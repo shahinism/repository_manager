@@ -1,0 +1,53 @@
+* Git Host Helper Scripts
+
+This project will host a set of scripts, helping me to maintain my
+personal project setting. The usual usecases are:
+
+1. Change my main Git host, for acting like an #######, lack of
+   feature, etc.
+2. Create a Git backup repo for my active projects in batch.
+
+  
+* How to use?
+
+Clone the repository. Then you have two options:
+
+** Run Directly
+
+#+begin_src bash
+  # poetry run [SCRIPT] [ARGUMENTS] [--OPTIONS]
+  poetry run togh --help
+#+end_src
+* Scripts
+
+** Git Uploader
+
+#+begin_src text
+Usage: togh.py [OPTIONS] PATH
+
+  This command will find all git repositories in a given path and upload them
+  to GitHub. I needed to structure them based on the projects, so it uses my
+  personal convention, where all repositories, are located in main project's
+  root directory.
+
+  The command will create the GitHub repository based on the convention (if it
+  doesn't already exist).
+
+  It'll upload all of the local branches, and tags.
+
+  After processing is done, it'll create a `github_lock` file in the `.git`
+  folder, to prevent reprocessing.
+
+  To use it, you need to set `GITHUB_TOKEN` environment variable. You can get
+  it based on this documentation: https://bit.ly/3leBkHM
+
+  Make sure you enable the following scopes:
+
+  1. Repository: Read access to metadata. 2. Repository: Read and Write access
+  to administration.
+
+Options:
+  --remote-name TEXT
+  --lock-name TEXT
+  --help              Show this message and exit.
+#+end_src
