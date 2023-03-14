@@ -164,6 +164,10 @@ Make sure you enable the following scopes:
 1. Repository: Read access to metadata.
 2. Repository: Read and Write access to administration.
 
+*NOTE* It'll add a custom remote (personal), so it won't overwrite
+proper existing remotes.  You can customize it using --remote-name
+option.
+
 """,
 )
 @click.argument("path", type=click.Path(exists=True))
