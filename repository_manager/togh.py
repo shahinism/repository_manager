@@ -18,6 +18,7 @@ if not GITHUB_TOKEN:
 
 GITHUB_USER = Github(os.environ["GITHUB_TOKEN"]).get_user()
 
+
 def get_or_create_repo(repo_name: str, private: bool = True) -> str:
     try:
         res = GITHUB_USER.get_repo(repo_name)
@@ -138,7 +139,9 @@ def process_repos(path: str, remote_name: str, lock_name: str = "github_lock") -
         set_lock(repo, lock_name)
 
 
-@click.command(name="Upload to GitHub", help="""
+@click.command(
+    name="Upload to GitHub",
+    help="""
 
 This command will find all git repositories in a given path and upload
 them to GitHub. I needed to structure them based on the projects, so
@@ -161,10 +164,23 @@ Make sure you enable the following scopes:
 1. Repository: Read access to metadata.
 2. Repository: Read and Write access to administration.
 
-""")
+""",
+)
 @click.argument("path", type=click.Path(exists=True))
-@click.option("r", "--remote-name", type=click.STRING, default="origin")
-@click.option("l", "--lock-name", type=click.STRING, default="github_lock")
+@click.option(
+    "-r",
+    "--remote-name",
+    type=click.STRING,
+    default="personal",
+    help="The name to set locally for remote repository.",
+)
+@click.option(
+    "-l",
+    "--lock-name",
+    type=click.STRING,
+    default="github_lock",
+    help="The lock file registered in the .git folder to prevent reprocessing.",
+)
 def main(path, remote_name, lock_name) -> None:
     process_repos(path, remote_name, lock_name)
 
